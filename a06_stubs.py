@@ -6,11 +6,11 @@
 # Purpose:Practice solving a problem more independently (without much / any starter code).
 # More practice breaking a problem into pieces using functions.
 # Even more practice with key concepts so far: loops, conditionals, and more!
-#################################################################################
+##################################################################################
 # Acknowledgements:
 #
 #
-#################################################################################
+##################################################################################
 import random
 
 def check_winner(user, computer):
