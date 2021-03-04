@@ -3,7 +3,7 @@
 # Username: fairs
 #
 # Assignment: A06: Stubs File Test Suite
-# Purpose:  Test suite template
+# Purpose:  Test the rock paper get score function
 #
 ######################################################################
 # Acknowledgements:
@@ -43,25 +43,21 @@ def stubs_test_suite():
     """
     print("\nRunning the stubs test suite.")
     ##########################################
-    print("\nTesting function 1.")
+    print("\nTesting check_winner.")
     ##########################################
 
-    #testit(function_1() == None) ALL FUNCTIONS
-
-
-    print("\nTesting function 2.")
-    ##########################################
-
-    #testit(function_2() == None)NO TESTS NEEDED
-
+    testit(check_winner("rock", "rock") == "tie") # test a tie
+    testit(check_winner("rock", "paper") == "loser")    # test a loss
+    testit(check_winner("rock", "scissors") == "winner")    # test a win
+    testit(check_winner("egg", "paper") == "egg")   # test the easter egg
 
     ##########################################
-    print("\nEnding the funky_functions_test_suite()).")
+    print("\nEnding the a06_stubs_test_suite()).")
 
 
 def main():
     """
-    A fun little program that sings the Willabee Wallabee song.
+    A 5 choice rock paper scissors game.
 
     :return: None
     """

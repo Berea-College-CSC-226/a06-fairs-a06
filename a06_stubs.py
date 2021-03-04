@@ -25,47 +25,29 @@ def check_winner(user, computer):
     global lives
     global rounds
     if user == "scissors" and computer == "paper":
-        print("Scissors cut paper.")
-
+        return "winner"
     elif user == "paper" and computer == "spock":
-        print("Paper disproves Spock.")
-        print("WINNER!")
-        lives += 1
+        return "winner"
     elif user == "paper" and computer == "rock":
-        print("Paper covers Rock")
-        print("WINNER!")
-        lives += 1
+        return "winner"
     elif user == "lizard" and computer == "spock":
-        print("Lizard poisons Spock.")
-        print("WINNER!")
-        lives += 1
+        return "winner"
     elif user == "spock" and computer == "scissors":
-        print("Spock smashes scissors.")
-        print("WINNER!")
-        lives += 1
+        return "winner"
     elif user == "scissors" and computer == "lizard":
-        print("Scissors decapitate lizard.")
-        print("WINNER!")
-        lives += 1
+        return "winner"
     elif user == "lizard" and computer == "paper":
-        print("Lizard eats paper.")
-        print("WINNER!")
-        lives += 1
+        return "winner"
     elif user == "spock" and computer == "rock":
-        print("Spock vaporizes rock.")
-        print("WINNER!")
-        lives += 1
+        return "winner"
     elif user == "rock" and computer == "scissors":
-        print("Rock crushes scissors.")
-        print("WINNER!")
-        lives += 1
+        return "winner"
+    elif user == "egg":     # EASTER EGG
+        return "egg"
     elif user == computer:  # if the user and computer choose the same thing declare a TIE!
-        print("You both chose " + computer+ ". \nIt's a TIE! ")
+        return "tie"
     else:   # if the computer wins. subtract 1 from lives, and check if player lost too many lives.
-        lives -= 1
-        print(user + " loses to " + computer + ". \nYou LOST! ")
-    print("You have " +str(lives)+" lives remaining.\n")
-    rounds += 1
+        return "loser"
 
 
 
@@ -97,20 +79,28 @@ def main():
     global rounds
     # user input
     user_choice = ""
-    possible_choices = ["rock", "paper", "scissors", "lizard", "spock"]
+    possible_choices = ["rock", "paper", "scissors", "lizard", "spock","egg"]
     while user_choice not in possible_choices:  # ask for input until the user gives a valid input
         user_choice = input("Your choice: ").lower()
-        if user_choice not in ["rock", "paper", "scissors", "lizard", "spock"]:
+        if user_choice not in possible_choices:
             print("Not a valid choice. Try again.")
 
     # computer random choice
     computer = computer_choice()    # get the computer's choice
     print("Computer choice: " + computer)
 
-    if check_winner(user_choice, computer) == "win":
+    if check_winner(user_choice, computer) == "winner":     # win
         print(user_choice +" beats "+ computer)
         print("WINNER!")
         lives += 1
+    elif check_winner(user_choice, computer) == "loser":    # loss
+        lives -= 1
+        print(user_choice + " loses to " + computer + ". \nYou LOST! ")
+    elif check_winner(user_choice, computer) == "egg":  # EASTER EGG
+        lives += 5
+        print("You eat the egg. It gives you the strength to destroy " + computer + " with your bear hands. \nYou eating the egg, you have regained some health.")
+    else:
+        print("You both chose " + computer + ". \nIt's a TIE! ")    # tie
 
     # If the player's lives run out then show how many rounds they lasted.
     # and tell them they ran out of lives.
@@ -122,8 +112,10 @@ def main():
             print("You lasted " + str(rounds) + " rounds! Nice!")
         exit()
     elif lives >= 20:
-        print("You made it to " + str(lives)+" lives. The computer gives up.")
+        print("You made it to " + str(lives)+" lives!\nThe computer gives up.")
         exit()
+    print("You have " + str(lives) + " lives remaining.\n")
+    rounds += 1
 
 
 
