@@ -1,6 +1,6 @@
 ######################################################################
-# Author: Scott Heggen and Brian Schack     TODO: Change this to your names
-# Username: heggens & schackb              TODO: Change this to your usernames
+# Author: Silas Fair
+# Username: fairs
 #
 # Assignment: A06: Stubs File Test Suite
 # Purpose:  Test suite template
@@ -46,13 +46,13 @@ def stubs_test_suite():
     print("\nTesting function 1.")
     ##########################################
 
-    testit(function_1() == None)
+    #testit(function_1() == None) ALL FUNCTIONS
 
 
     print("\nTesting function 2.")
     ##########################################
 
-    testit(function_2() == None)
+    #testit(function_2() == None)NO TESTS NEEDED
 
 
     ##########################################

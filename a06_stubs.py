@@ -26,8 +26,7 @@ def check_winner(user, computer):
     global rounds
     if user == "scissors" and computer == "paper":
         print("Scissors cut paper.")
-        print("WINNER!")
-        lives += 1
+
     elif user == "paper" and computer == "spock":
         print("Paper disproves Spock.")
         print("WINNER!")
@@ -94,6 +93,9 @@ def main():
     """
     print("Choose one of the following: rock, paper, scissors, lizard, spock.")
 
+    global lives
+    global rounds
+    # user input
     user_choice = ""
     possible_choices = ["rock", "paper", "scissors", "lizard", "spock"]
     while user_choice not in possible_choices:  # ask for input until the user gives a valid input
@@ -101,17 +103,21 @@ def main():
         if user_choice not in ["rock", "paper", "scissors", "lizard", "spock"]:
             print("Not a valid choice. Try again.")
 
+    # computer random choice
     computer = computer_choice()    # get the computer's choice
     print("Computer choice: " + computer)
 
-    check_winner(user_choice, computer)
+    if check_winner(user_choice, computer) == "win":
+        print(user_choice +" beats "+ computer)
+        print("WINNER!")
+        lives += 1
 
     # If the player's lives run out then show how many rounds they lasted.
     # and tell them they ran out of lives.
     if lives <= 0:
         print("You ran out of lives!")
         if rounds <= 20:
-            print("You only lasted "+ str(rounds) +" rounds!")
+            print("You only lasted " + str(rounds) + " rounds!")
         else:
             print("You lasted " + str(rounds) + " rounds! Nice!")
         exit()
