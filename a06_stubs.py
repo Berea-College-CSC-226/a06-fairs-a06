@@ -21,7 +21,6 @@ def check_winner(user, computer):
     :param computer: the random computer selection. Rock, Paper, Scissors, Spock, Lizard.
     """
     winner = ""
-
     global lives
     if user == "scissors" and computer == "paper":
         print("Scissors cut paper.")
@@ -93,6 +92,7 @@ def main():
     while user_choice not in ["rock", "paper", "scissors", "lizard", "spock"]:
         user_choice = input("Your choice: ")
     computer = computer_choice()
+    print("Computer choice:")
     check_winner(user_choice, computer)
 
 
