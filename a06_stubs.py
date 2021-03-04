@@ -62,7 +62,7 @@ def check_winner(user, computer):
         lives += 1
     elif user == computer:  # if the user and computer choose the same thing declare a TIE!
         print("You both chose " + computer+ ". \nIt's a TIE! ")
-    else:   # if the computer wins -1 lives and check if player lost too many lives.
+    else:   # if the computer wins. subtract 1 from lives, and check if player lost too many lives.
         lives -= 1
         print(user + " loses to " + computer + ". \nYou LOST! ")
     print("You have " +str(lives)+" lives remaining.\n")
@@ -79,12 +79,14 @@ def computer_choice():
     choice = random.choice(weapons)
     return choice
 
-# Scoring and rounds
+
+# Define and set global variables
 global lives
 lives = 10
 
 global rounds
 rounds = 0
+
 
 def main():
     """
@@ -94,21 +96,27 @@ def main():
 
     user_choice = ""
     possible_choices = ["rock", "paper", "scissors", "lizard", "spock"]
-    while user_choice not in possible_choices:
+    while user_choice not in possible_choices:  # ask for input until the user gives a valid input
         user_choice = input("Your choice: ").lower()
         if user_choice not in ["rock", "paper", "scissors", "lizard", "spock"]:
             print("Not a valid choice. Try again.")
 
-    computer = computer_choice()
+    computer = computer_choice()    # get the computer's choice
     print("Computer choice: " + computer)
+
     check_winner(user_choice, computer)
+
     # If the player's lives run out then show how many rounds they lasted.
+    # and tell them they ran out of lives.
     if lives <= 0:
         print("You ran out of lives!")
         if rounds <= 20:
             print("You only lasted "+ str(rounds) +" rounds!")
         else:
-            print("You lasted" + str(rounds) + " rounds! Nice!")
+            print("You lasted " + str(rounds) + " rounds! Nice!")
+        exit()
+    elif lives >= 20:
+        print("You made it to " + str(lives)+" lives. The computer gives up.")
         exit()
 
 
