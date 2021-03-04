@@ -15,13 +15,15 @@ import random
 
 def check_winner(user, computer):
     """
-    Check whether the user or computer wins. Print the result of the round, and add 1 to the winner's score.
+    Check whether the user or computer wins.
+    Print the result of the round, and add one life or take one away depending on.
 
     :param user: the choice the user entered. Rock, Paper, Scissors, Spock, Lizard.
     :param computer: the random computer selection. Rock, Paper, Scissors, Spock, Lizard.
     """
     winner = ""
     global lives
+    global rounds
     if user == "scissors" and computer == "paper":
         print("Scissors cut paper.")
         print("WINNER!")
@@ -53,20 +55,18 @@ def check_winner(user, computer):
     elif user == "spock" and computer == "rock":
         print("Spock vaporizes rock.")
         print("WINNER!")
-        score += 1
+        lives += 1
     elif user == "rock" and computer == "scissors":
         print("Rock crushes scissors.")
         print("WINNER!")
         lives += 1
-    elif user == computer:
+    elif user == computer:  # if the user and computer choose the same thing declare a TIE!
         print("You both chose " + computer+ ". \nIt's a TIE! ")
-    else:
+    else:   # if the computer wins -1 lives and check if player lost too many lives.
         lives -= 1
-        print(user+ " is beaten by " + computer+ ". \nYou LOST! ")
-        if lives <= 0:
-            print("You ran out of lives!")
-            exit()
-    print("You have " +str(lives)+" lives remaining.")
+        print(user + " loses to " + computer + ". \nYou LOST! ")
+    print("You have " +str(lives)+" lives remaining.\n")
+    rounds += 1
 
 
 
@@ -79,8 +79,12 @@ def computer_choice():
     choice = random.choice(weapons)
     return choice
 
+# Scoring and rounds
 global lives
 lives = 10
+
+global rounds
+rounds = 0
 
 def main():
     """
@@ -89,11 +93,23 @@ def main():
     print("Choose one of the following: rock, paper, scissors, lizard, spock.")
 
     user_choice = ""
-    while user_choice not in ["rock", "paper", "scissors", "lizard", "spock"]:
-        user_choice = input("Your choice: ")
+    possible_choices = ["rock", "paper", "scissors", "lizard", "spock"]
+    while user_choice not in possible_choices:
+        user_choice = input("Your choice: ").lower()
+        if user_choice not in ["rock", "paper", "scissors", "lizard", "spock"]:
+            print("Not a valid choice. Try again.")
+
     computer = computer_choice()
-    print("Computer choice:")
+    print("Computer choice: " + computer)
     check_winner(user_choice, computer)
+    # If the player's lives run out then show how many rounds they lasted.
+    if lives <= 0:
+        print("You ran out of lives!")
+        if rounds <= 20:
+            print("You only lasted "+ str(rounds) +" rounds!")
+        else:
+            print("You lasted" + str(rounds) + " rounds! Nice!")
+        exit()
 
 
 
